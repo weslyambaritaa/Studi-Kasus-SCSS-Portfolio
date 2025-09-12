@@ -1,0 +1,261 @@
+@use "sass:color";
+
+$primary-color: #4361ee;
+$primary-dark: #3a56d4;
+$primary-light: #6178f1;
+
+// Warna Sekunder
+$secondary-color: #2ecc71;
+$secondary-dark: #27ae60;
+$secondary-light: #4cdb87;
+
+// Warna Netral
+$dark-color: #2d3748;
+$light-color: #f8f9fa;
+$gray-color: #a0aec0;
+$white-color: #ffffff;
+
+// Warna Status
+$success-color: #48bb78;
+$warning-color: #ecc94b;
+$error-color: #f56565;
+$info-color: #4299e1;
+
+// Typography
+$font-stack: "Inter", "Arial", sans-serif;
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.875rem;
+$font-size-base: 1rem;
+$font-size-lg: 1.125rem;
+$font-size-xl: 1.25rem;
+$font-size-2xl: 1.5rem;
+$font-size-3xl: 1.875rem;
+$font-size-4xl: 2.25rem;
+
+// Spacing
+$spacing: 1rem;
+$spacing-xs: calc($spacing / 4);
+$spacing-sm: calc($spacing / 2);
+$spacing-md: $spacing;
+$spacing-lg: $spacing * 1.5;
+$spacing-xl: $spacing * 2;
+$spacing-2xl: $spacing * 3;
+
+// Border Radius
+$border-radius-sm: 0.25rem;
+$border-radius: 0.375rem;
+$border-radius-lg: 0.5rem;
+$border-radius-xl: 0.75rem;
+
+// Shadow
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px 0 rgba(0, 0, 0, 0.06);
+$shadow-md:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+// Breakpoints
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+
+// =============================================
+// MIXINS - Utilities yang dapat digunakan kembali
+// =============================================
+
+// Flexbox Center
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// Flexbox Between
+@mixin flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+// Card Style
+@mixin card {
+  background-color: #c1c1c1;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow;
+  padding: $spacing-lg;
+  max-width: 700px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    box-shadow: $shadow-lg;
+    transform: scale(1.008);
+  }
+}
+
+// Button Style
+@mixin button($bg-color, $text-color: $white-color) {
+    background-color: $bg-color;
+    color: $text-color;
+    border: none;
+    padding: $spacing-sm $spacing-lg;
+    border-radius: $border-radius;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+
+    &:hover {
+        background-color: color.adjust($bg-color, $lightness: -10%);
+        transform: translateY(-1px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+
+    i {
+        font-size: $font-size-lg;
+    }
+}
+
+* {
+    margin: 30;
+    padding:20;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    font-family: $font-stack;
+    font-size: $font-size-lg;
+    line-height: 1.6;
+    color: $dark-color;
+    overflow-x: hidden;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-lg;
+  padding: $spacing-xl $spacing-lg;
+  background-color: $light-color;
+  min-height: 100vh;
+  align-items: flex-start;
+
+  > * {
+    flex: 1 1 300px;
+    max-width: 300px;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+.kotak-info {
+    @include card;
+    margin-bottom: $spacing-lg;
+
+    i {
+        font-size: $font-size-3xl;
+        margin-bottom: $spacing-sm;
+    }
+}
+
+header {
+    @include flex-between;
+    background-color: $primary-color;
+    color: $white-color;
+    padding: $spacing-md $spacing-lg;
+    box-shadow: $shadow-md;
+
+    h2 {
+        font-size: $font-size-2xl;
+        margin: 0;
+        color: $white-color;
+    }
+
+    h3 {
+        color: $white-color;
+        margin-left: $spacing-lg;
+        font-weight: 500;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: color.adjust($white-color, $lightness: -20%);
+        }
+    }
+
+    img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid $white-color;
+    } 
+}
+
+footer {
+    background-color: $dark-color;
+    color: $white-color;
+    padding: $spacing-xl 0;
+    width: 100%;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+     .social-links {
+            display: flex;
+            gap: $spacing;
+
+            a {
+                color: rgba($white-color, 0.7);
+                font-size: $font-size-xl;
+                transition: color 0.3s;
+
+                &:hover {
+                    color: $primary-color;
+                }
+            }
+        }
+
+        .footer-links {
+            h3 {
+                font-size: $font-size-lg;
+                margin-bottom: $spacing;
+                color: $white-color;
+            }
+
+            ul {
+                list-style: none;
+                padding: 0;
+
+                li {
+                    margin-bottom: $spacing-sm;
+
+                    a {
+                        color: rgba($white-color, 0.7);
+                        text-decoration: none;
+                        transition: color 0.3s;
+
+                        &:hover {
+                            color: $primary-color;
+                        }
+                    }
+                }
+            }
+        }
+}
+
